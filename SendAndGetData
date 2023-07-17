@@ -1,0 +1,24 @@
+const apiUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCX6OQ3DkcsbYNE6H8uQQuVA&maxResults=1&order=date&key=AIzaSyA1fTSb3ucjoWZrRkaSW4c2-ei1u7OYS5k';
+const requestData = { key: 'value' }; // Replace with your data
+
+async function getDataAndPutData() {
+  try {
+    // GET request
+    const getResponse = await fetch(apiUrl);
+    const getData = await getResponse.json();
+    console.log('GET Data:', getData);
+
+    // PUT request
+    const putResponse = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
+    const putData = await putResponse.json();
+    console.log('PUT Data:', putData);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
