@@ -1,24 +1,27 @@
-const apiUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCX6OQ3DkcsbYNE6H8uQQuVA&maxResults=1&order=date&key=AIzaSyA1fTSb3ucjoWZrRkaSW4c2-ei1u7OYS5k';
-const requestData = { key: 'value' }; // Replace with your data
+const sourceApiUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCX6OQ3DkcsbYNE6H8uQQuVA&maxResults=1&order=date&key=AIzaSyA1fTSb3ucjoWZrRkaSW4c2-ei1u7OYS5k';
+const destinationApiUrl = 'https://api.example.com/destination';
 
-async function getDataAndPutData() {
-  try {
-    // GET request
-    const getResponse = await fetch(apiUrl);
-    const getData = await getResponse.json();
-    console.log('GET Data:', getData);
-
-    // PUT request
-    const putResponse = await fetch(apiUrl, {
-      method: 'PUT',
+// Fetch data from the source API
+fetch(sourceApiUrl)
+  .then(response => response.json())
+  .then(data => {
+    // POST data to your own API
+    fetch(destinationApiUrl, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestData)
-    });
-    const putData = await putResponse.json();
-    console.log('PUT Data:', putData);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        // Handle the response from your own API
+        console.log('Response from your API:', responseData);
+      })
+      .catch(error => {
+        console.error('Error while sending data to your API:', error);
+      });
+  })
+  .catch(error => {
+    console.error('Error while fetching data from the source API:', error);
+  });
