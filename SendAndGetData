@@ -1,5 +1,5 @@
 const sourceApiUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCX6OQ3DkcsbYNE6H8uQQuVA&maxResults=1&order=date&key=AIzaSyA1fTSb3ucjoWZrRkaSW4c2-ei1u7OYS5k';
-const destinationApiUrl = 'https://api.example.com/destination';
+const destinationApiUrl = 'https://github.com/twospaxe/api/blob/main/data.json';
 
 // Fetch data from the source API
 fetch(sourceApiUrl)
